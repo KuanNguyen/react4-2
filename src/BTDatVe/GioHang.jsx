@@ -10,13 +10,7 @@ class GioHang extends Component {
             return <tr key={`cart-${ghe.soGhe}`}>
                 <td>{ghe.soGhe}</td>
                 <td>{ghe.gia}</td>
-                <td><button onClick={() => {
-                    let action = {
-                        type: "XOA_GIO_HANG",
-                        gheXoa: ghe.soGhe
-                    }
-                    this.props.dispatch(action);
-                }} className='btn btn-danger'>Hủy vé</button></td>
+                
                 
             </tr>
             
@@ -26,7 +20,6 @@ class GioHang extends Component {
 
 
     render() {
-        console.log(this.props)
         return (
             <div className="container" id='trangGH'>
                 <table className='gioHang'>
@@ -34,7 +27,7 @@ class GioHang extends Component {
                         <tr>
                             <th>Số Ghế</th>
                             <th>Giá</th>
-                            <th></th>
+                            
                         </tr>
                     </thead>
                     <tbody>

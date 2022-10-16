@@ -170,6 +170,7 @@ export default class BTDatVe extends Component {
     }
 
   ]
+  
 
   
 
@@ -182,10 +183,11 @@ export default class BTDatVe extends Component {
         </div> 
         <div className="row">
           <div className="col">
-            <VeList loaiVe={this.loaiVe} />
+            <VeList loaiVe={this.loaiVe}/>
           </div>
         </div>
         <div className="col">
+          <h1 className='gioHangT'>Danh Sách Ghế Chọn</h1>
         <GioHang/>
       </div>
 

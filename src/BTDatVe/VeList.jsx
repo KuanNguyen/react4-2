@@ -11,9 +11,11 @@ import { $CombinedState } from 'redux';
   // state = { isSelect: false}
  
   
-    state = {isChecked: []};
+    state = {isChecked: [], chon: ""};
+   
   
-
+  
+    // state = {checked: 'false'}
 
   onChange = id => {
     const isCheck = this.state.isChecked;
@@ -24,15 +26,14 @@ import { $CombinedState } from 'redux';
     // Index > -1 means that the item exists and that the checkbox is checked
     // and in that case we want to remove it from the array and uncheck it
     if (findIdx > -1) {
-      isCheck.splice(findIdx, 1);
       
+      isCheck.splice(findIdx, 1);
       let action = {
             type: "XOA_GIO_HANG",
             gheXoa:id.soGhe
           }
           this.props.dispatch(action);
     } else {
-      console.log(findIdx)
       isCheck.push(id)
       const action ={
         type:"CHON_CHO_NGOI",
@@ -58,7 +59,7 @@ import { $CombinedState } from 'redux';
           <td className='rowNumber'>{ve.hang}</td>
           {ve.danhSachGhe.map((ghe) => {
           return <td  key={ghe.soGhe}>
-             <input type="checkbox" onChange={() =>{
+             <input defaultChecked={this.state.chon}  type="checkbox" onChange={() =>{
 
                  this.onChange(ghe)  
                  
