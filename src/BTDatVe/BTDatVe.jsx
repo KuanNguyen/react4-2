@@ -171,7 +171,7 @@ export default class BTDatVe extends Component {
 
   ]
 
-  soGhe
+  
 
   render() {
     return (

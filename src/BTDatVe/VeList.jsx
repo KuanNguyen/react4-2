@@ -8,37 +8,61 @@ import { $CombinedState } from 'redux';
 
 
  class VeList extends Component {
+  // state = { isSelect: false}
+ 
+  
+    state = {isChecked: []};
   
 
- 
-  constructor() {
-    super();
-    this.state = {isChecked: true};
-  }
 
+  onChange = id => {
+    const isCheck = this.state.isChecked;
+
+    // Find index
+    const findIdx = isCheck.indexOf(id);
+
+    // Index > -1 means that the item exists and that the checkbox is checked
+    // and in that case we want to remove it from the array and uncheck it
+    if (findIdx > -1) {
+      isCheck.splice(findIdx, 1);
+      
+      let action = {
+            type: "XOA_GIO_HANG",
+            gheXoa:id.soGhe
+          }
+          this.props.dispatch(action);
+    } else {
+      console.log(findIdx)
+      isCheck.push(id)
+      const action ={
+        type:"CHON_CHO_NGOI",
+        ghe:id
+      }
+      this.props.dispatch(action)
+     
+    }
+
+    
+
+    this.setState({
+      isChecked: this.state.isChecked
+    });
+
+  };
 
   renderVe = () => {
-    
+    const { isChecked } = this.state;
     return this.props.loaiVe.map((ve) => {
       return <tbody key={ve.hang}>
         <tr>
           <td className='rowNumber'>{ve.hang}</td>
           {ve.danhSachGhe.map((ghe) => {
-          return <td  key={ghe.danhSachGhe}>
-             <input type="checkbox" onClick={()=>{
-              this.setState({isChecked: !this.state.isChecked});
-                if (this.state.isChecked) {
-                  const action ={
-                    type:"CHON_CHO_NGOI",
-                    sanPham:ghe
-                  }
-                  this.props.dispatch(action)
-                }else{
-                  console.log("vv");
-                }
-              
+          return <td  key={ghe.soGhe}>
+             <input type="checkbox" onChange={() =>{
+
+                 this.onChange(ghe)  
                  
-             }} className="seats" defaultValue={ghe.soGhe} />
+             }} className="seats" selected={isChecked.includes(ghe.soGhe)} />
           </td>
         })}
         </tr>
@@ -77,6 +101,15 @@ import { $CombinedState } from 'redux';
 }
 
 
+
+
+
+
+
+
+
+
+
 export default connect()(VeList);
 
 
@@ -84,14 +117,3 @@ export default connect()(VeList);
 
 
 
-// ()=>{
-              
-
-//   const action ={
-//     type:"CHON_CHO_NGOI",
-//     sanPham:ghe
-//   }
-
-//   this.props.dispatch(action)
-
-//  }
